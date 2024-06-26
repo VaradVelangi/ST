@@ -1,0 +1,47 @@
+lock_price = 45
+stock_price = 30
+barrel_price = 25
+
+# Initialize production limits
+lock_limit = 70
+stock_limit = 80
+barrel_limit = 90
+
+# Initialize commission levels
+commission_level_1 = 0.10
+commission_level_2 = 0.15
+commission_level_3 = 0.20
+
+# Define two sets of sales data
+sales_data = [
+    {"locks_sold": 60, "stocks_sold": 70, "barrels_sold": 80},
+    {"locks_sold": 80, "stocks_sold": 60, "barrels_sold": 70}
+]
+
+# Print header for the table
+print("Sales Report:")
+print("{:<10} {:<10} {:<10} {:<10} {:<15} {:<15}".format("Locks", "Stocks", "Barrels", "Total Sales", "Commission ($)", "Commission (%)"))
+print("-" * 70)
+
+# Calculate and print results for each set of sales data
+for data in sales_data:
+    locks_sold = data["locks_sold"]
+    stocks_sold = data["stocks_sold"]
+    barrels_sold = data["barrels_sold"]
+
+    # Calculate total sales
+    total_sales = (locks_sold * lock_price) + (stocks_sold * stock_price) + (barrels_sold * barrel_price)
+
+    # Calculate commission 
+    if total_sales <= 1000:
+        commission = total_sales * commission_level_1
+    elif total_sales <= 1800:
+        commission = (1000 * commission_level_1) + ((total_sales - 1000) * commission_level_2)
+    else:
+        commission = (1000 * commission_level_1) + (800 * commission_level_2) + ((total_sales - 1800) * commission_level_3)
+
+    # Calculate commission percentage
+    commission_percentage = (commission / total_sales) * 100 if total_sales != 0 else 0
+
+    # Print results in tabular format
+    print("{:<10} {:<10} {:<10} ${:<10} ${:<15.2f} {:<15.2f}%".format(locks_sold, stocks_sold, barrels_sold, total_sales, commission, commission_percentage))
