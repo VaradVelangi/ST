@@ -1,0 +1,31 @@
+def classify_triangle(a, b, c):
+    # Check if it forms a triangle
+    if a + b <= c or a + c <= b or b + c <= a:
+        return "Not a triangle"
+    # Check if it's an equilateral triangle
+    elif a == b == c:
+        return "Equilateral triangle"
+    # Check if it's an isosceles triangle
+    elif a == b or a == c or b == c:
+        return "Isosceles triangle"
+    # If it's not equilateral or isosceles, it must be scalene
+    else:
+        return "Scalene triangle"
+
+# Test cases based on boundary-value analysis
+test_cases = [
+    (1, 1, 1),      # Equilateral triangle (minimum value)
+    (10, 10, 10),   # Equilateral triangle (maximum value)
+    (1, 1, 2),      # Isosceles triangle (minimum value)
+    (10, 10, 5),    # Isosceles triangle (maximum value)
+    (1, 2, 3),      # Scalene triangle (minimum value)
+    (9, 7, 8),      # Scalene triangle (maximum value)
+    (1, 1, 3),      # Not a triangle (minimum value)
+    (10, 10, 20)    # Not a triangle (maximum value)
+]
+
+# Execute test cases
+for sides in test_cases:
+    a, b, c = sides
+    result = classify_triangle(a, b, c)
+    print(f"Sides: {a}, {b}, {c} --> {result}")
