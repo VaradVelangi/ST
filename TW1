@@ -1,13 +1,22 @@
 def classify_triangle(a, b, c):
-    # Check if it forms a triangle
+    
     if a + b <= c or a + c <= b or b + c <= a:
         return "Not a triangle"
-    # Check if it's an equilateral triangle
+   
     elif a == b == c:
         return "Equilateral triangle"
-    # Check if it's an isosceles triangle
+    
     elif a == b or a == c or b == c:
         return "Isosceles triangle"
-    # If it's not equilateral or isosceles, it must be scalene
     else:
         return "Scalene triangle"
+
+
+# Test cases
+test_cases = [
+    (3, 4, 5),      # Scalene triangle
+    (5, 5, 5),      # Equilateral triangle
+    (4, 4, 6),      # Isosceles triangle
+    (1, 2, 3),      # Not a triangle
+    (7, 5, 2),      # Not a triangle
+]
