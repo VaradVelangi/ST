@@ -1,0 +1,28 @@
+def triangle_type(a, b, c):
+    # Check if sides form a triangle
+    if a + b <= c or a + c <= b or b + c <= a:
+        return "Not a triangle"
+    
+    # Check if equilateral
+    if a == b == c:
+        return "Equilateral"
+    # Check if isosceles
+    elif a == b or b == c or a == c:
+        return "Isosceles"
+    # Check if scalene
+    else:
+        return "Scalene"
+
+# Test cases based on equivalence class partitioning with names
+test_cases = [
+    ("Equilateral", 3, 3, 3),  # All sides are equal
+    ("Isosceles", 3, 3, 2),     # Two sides are equal
+    ("Scalene", 3, 4, 5),       # No sides are equal
+    ("Not a triangle", 10, 1, 1),  # Sum of two sides <= third side
+    ("Not a triangle", 7, 8, 15),  # Sum of two sides <= third side
+]
+
+# Execute test cases and print results
+for ec_name, *test in test_cases:
+    result = triangle_type(*test)
+    print(f"Equivalence Class: {ec_name}, Sides: {test}, Triangle Type: {result}")
