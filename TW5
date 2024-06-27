@@ -1,42 +1,39 @@
-lock_price = 45
-stock_price = 30
-barrel_price = 25
+lockPrice = 45.0
+stockPrice = 30.0
+barrelPrice = 25.0
 
-# Initialize commission levels
-commission_level_1 = 0.10
-commission_level_2 = 0.15
-commission_level_3 = 0.20
+totalLocks = 0
+totalStocks = 0
+totalBarrels = 0
 
-def calculate_total_sales(locks_sold, stocks_sold, barrels_sold):
-    total_sales = (locks_sold * lock_price) + (stocks_sold * stock_price) + (barrels_sold * barrel_price)
-    return total_sales
+locks = int(input("Enter the number of locks: "))
 
-def calculate_commission(total_sales):
-    if total_sales <= 1000:
-        commission = total_sales * commission_level_1
-    elif total_sales <= 1800:
-        commission = (1000 * commission_level_1) + ((total_sales - 1000) * commission_level_2)
-    else:
-        commission = (1000 * commission_level_1) + (800 * commission_level_2) + ((total_sales - 1800) * commission_level_3)
-    return commission
-
-# Test cases
-test_cases = [
-    {"locks_sold": 60, "stocks_sold": 70, "barrels_sold": 80},
-    {"locks_sold": 80, "stocks_sold": 60, "barrels_sold": 70},
-    {"locks_sold": 90, "stocks_sold": 90, "barrels_sold": 90}
-]
-
-# Execute test cases and print results
-print("Test Results:")
-print("{:<10} {:<15} {:<15} {:<15}".format("Locks", "Stocks", "Barrels", "Commission"))
-print("-" * 55)
-for case in test_cases:
-    locks_sold = case["locks_sold"]
-    stocks_sold = case["stocks_sold"]
-    barrels_sold = case["barrels_sold"]
+while locks != -1:
+    stocks = int(input("Enter the number of stocks: "))
+    barrels = int(input("Enter the number of barrels: "))
     
-    total_sales = calculate_total_sales(locks_sold, stocks_sold, barrels_sold)
-    commission = calculate_commission(total_sales)
+    totalLocks += locks
+    totalStocks += stocks
+    totalBarrels += barrels
     
-    print("{:<10} {:<15} {:<15} ${:.2f}".format(locks_sold, stocks_sold, barrels_sold, commission)) 
+    locks = int(input("Enter the number of locks: "))
+    
+print("Total locks: ", totalLocks)
+print("Total stocks: ", totalStocks)
+print("Total barrels: ", totalBarrels)
+
+lockSales = totalLocks * lockPrice
+stockSales = totalStocks * stockPrice
+barrelSales = totalBarrels * barrelPrice
+
+sales = lockSales + stockSales + barrelSales
+print("Total sales: ", sales)
+
+if sales > 1800:
+    commission = 0.10 * 1000 + 0.15 * 800 + 0.20 * (sales - 1800)
+elif sales > 1000:  
+    commission = 0.10 * 1000 + 0.15 * (sales - 1000)
+else:
+    commission = 0.10 * sales
+    
+print("Commission: ", commission)
